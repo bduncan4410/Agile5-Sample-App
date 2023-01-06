@@ -5,6 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import PocketBase from 'pocketbase'
+import { createClient } from '../db/base'
+import { Task } from '../../typings'
 
 export default function CreateTask() {
   const [name, setName] = useState('');
@@ -15,16 +17,18 @@ export default function CreateTask() {
   const router = useRouter();
 
   const create = async() => {
-  const db = new PocketBase('http://127.0.0.1:8090');
-
+    const db = createClient('http://127.0.0.1:8090/api/');
+    const newTask: Task = 
+    {
+      "id": "",
+      "name": name,
+      "description": description,
+      "start_date": startDate,
+      "end_date": endDate,
+      "completed": false,
+    }
   
-  await db.collection('tasks').create({
-    "name": name,
-    "description": description,
-    "start_date": startDate,
-    "end_date": endDate,
-    "completed": false,
-  });
+    await db.collection('tasks').create(newTask);
     
     setName('');
     setDescription('');

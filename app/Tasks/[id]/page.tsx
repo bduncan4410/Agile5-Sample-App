@@ -2,7 +2,7 @@ import styles from '../Tasks.module.css';
 import PocketBase from 'pocketbase';
 
 async function getTask(taskId: string) {
-  const db = new PocketBase('http://127.0.0.1:8090');
+  const db = new PocketBase('http://127.0.0.1:8090/api/');
   const data = await db.collection('tasks').getOne(taskId, {
     expand: 'relField1,relField2.subRelField',
   });
