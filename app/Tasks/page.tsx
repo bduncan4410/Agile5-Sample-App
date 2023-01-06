@@ -7,9 +7,10 @@ import  { getOneTask } from '../db/task'
 
 
 async function getTasks() {
-  const client = await createClient('http://172.0.0.1:8090/');
-  const data = getOneTask(client, "zzh8h375zryoko6").then((data) => {
-    return data?.items as any[]});
+  const client = await createClient('http://172.0.0.1:8090/api/');
+  let res = await getOneTask(client, "zzh8h375zryoko6")
+  let data = res.json();
+  return data?.items as any[];
 }
 
 export default async function TasksPage() {

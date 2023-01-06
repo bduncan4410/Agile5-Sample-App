@@ -17,7 +17,7 @@ export default function CreateTask() {
   const router = useRouter();
 
   const create = async() => {
-    const db = createClient('http://127.0.0.1:8090/api/');
+    const db = createClient("http://127.0.0.1:8090");
     const newTask: Task = 
     {
       "id": "",

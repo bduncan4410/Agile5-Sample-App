@@ -1,4 +1,5 @@
-import PocketBase from 'pocketbase'
+import pocketBase from 'pocketbase'
+
 
 export const dynamic = 'auto',
   dynamicParams = true,
@@ -7,6 +8,6 @@ export const dynamic = 'auto',
   runtime = 'nodejs',
   preferredRegion = 'auto'
 
-export function createClient(endpoint:string) : PocketBase {
-   return new PocketBase(endpoint);
+export function createClient(endpoint:string) : pocketBase {
+   return new pocketBase(endpoint);
 }
