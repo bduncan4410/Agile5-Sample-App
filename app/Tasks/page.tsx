@@ -1,20 +1,14 @@
 import Link from 'next/link';
 import styles from './Tasks.module.css';
-import CreateTask from './CreateTask';
-
-// export const dynamic = 'auto',
-//   dynamicParams = true,
-//   revalidate = 0,
-//   fetchCache = 'auto',
-//   runtime = 'nodejs',
-//   preferredRegion = 'auto'
-
+import CreateTask from './TaskManager';
+import  { createClient} from '../db/base'
+import  { getAllTasks } from '../db/task'
 
 async function getTasks() {
-  // const db = new PocketBase('http://127.0.0.1:8090');
-  // const result = await db.records.getList('Tasks');
-  const res = await fetch('http://127.0.0.1:8090/api/collections/Tasks/records?page=1&perPage=30', { cache: 'no-store' });
-  const data = await res.json();
+  const client = await createClient('http://127.0.0.1:8090');
+  let res = await getAllTasks(client);
+  console.log(res);
+  let data = res.map(Task => Task.data);
   return data?.items as any[];
 }
 
@@ -25,8 +19,8 @@ export default async function TasksPage() {
     <div>
       <h1>Tasks</h1>
       <div className={styles.grid}>
-        {Tasks?.map((task) => {
-          return <Task key={task.id} Task={task} />;
+        {Tasks?.map((Task) => {
+          return <Task key={Task.id} Task={Task} />;
         })}
       </div>
 
@@ -35,19 +29,15 @@ export default async function TasksPage() {
   );
 }
 
-function Task({ Task }: any) {
-  const { id, name, description, start_date, end_date, created, updated } = Task || {};
+export function Task({ Task }: any) {
+  const { id, title, content, created } = Task || {};
 
   return (
     <Link href={`/Tasks/${id}`}>
       <div className={styles.Task}>
-        <h2>{name}</h2>
-        <h5>{description}</h5>
-        
-        <p>{start_date}</p>
-        <p>{end_date}</p>
+        <h2>{title}</h2>
+        <h5>{content}</h5>
         <p>{created}</p>
-        <p>{updated}</p>
       </div>
     </Link>
   );
