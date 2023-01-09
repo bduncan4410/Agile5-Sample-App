@@ -2,14 +2,13 @@ import Link from 'next/link';
 import styles from './Tasks.module.css';
 import CreateTask from './TaskManager';
 import  { createClient} from '../db/base'
-import  { getOneTask } from '../db/task'
- 
-
+import  { getAllTasks } from '../db/task'
 
 async function getTasks() {
-  const client = await createClient('http://172.0.0.1:8090/api/');
-  let res = await getOneTask(client, "zzh8h375zryoko6")
-  let data = res.json();
+  const client = await createClient('http://127.0.0.1:8090');
+  let res = await getAllTasks(client);
+  console.log(res);
+  let data = res.map(Task => Task.data);
   return data?.items as any[];
 }
 
