@@ -65,3 +65,13 @@
     text-align: left;
     color: dodgerblue;
   }
+  .create-task-form{
+    visibility: hidden;
+  }
+  .form h5{
+  margin: 0rem 0rem;
+    
+  }
+  .form button{
+    margin: 0.5rem 0rem;
+  }

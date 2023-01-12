@@ -4,9 +4,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import PocketBase from 'pocketbase'
-import { createClient } from '../db/base'
-import { Task } from '../../typings'
+import { createClient } from '../../db/base'
+import { Task } from '../../../typings'
 
 export default function CreateTask() {
   const [name, setName] = useState('');

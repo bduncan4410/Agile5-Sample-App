@@ -1,7 +1,8 @@
 import styles from '../Tasks.module.css';
 import { createClient } from '../../db/base';
 import { getOneTask, removeTask } from '../../db/task';
-import DeleteButton from './DeleteButton';
+import DeleteButton from './components/DeleteButton';
+import UpdateTaskForm from './components/UpdateTaskForm';
 
 async function getTask(taskId: string) {
   const client = await createClient('http://127.0.0.1:8090');
@@ -16,7 +17,7 @@ export default async function TaskPage({ params }: any) {
   return (
     <div>
       <h1>tasks/{task.id}</h1>
-      <div className={styles.task}>
+      <div className={styles.Task}>
         <h3>{task.name}</h3>
         <h5>{task.description}</h5>
         <p>Status: {task.completed? "Complete" : "Incomplete"  }</p>
@@ -24,9 +25,14 @@ export default async function TaskPage({ params }: any) {
         <p>End Date: {new Date(task.end_date).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}</p>
       </div>
       <div>
+        <UpdateTaskForm task={task}/>
         <DeleteButton deleteID={task.id}/>
+      </div>
+      <div>
+
       </div>
     </div>
   );
+  
 }
 

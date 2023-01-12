@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './Tasks.module.css';
-import CreateTask from './TaskManager';
+import CreateTask from './components/CreateTaskForm';
 import  { createClient} from '../db/base'
 import  { getAllTasks } from '../db/task'
 
@@ -36,7 +36,7 @@ export function Task({ Task }: any) {
       <div className={styles.Task}>
         <h2>{name}</h2>
         <h5>{description}</h5>
-        <p>{completed}</p>
+        <p>Status: {completed? "Complete" : "Incomplete"  }</p>
       </div>
     </Link>
   );

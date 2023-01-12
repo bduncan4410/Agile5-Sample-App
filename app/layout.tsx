@@ -10,14 +10,13 @@ export default function RootLayout({
   return (
     <html>
       <body>
-      <ButtonAppBar>
-      </ButtonAppBar>
-        <main>
-          <nav>
-          
-          </nav>
+        <nav>
+          <ButtonAppBar>
+          </ButtonAppBar>
+        </nav>
+        <div className='main'>
           {children}
-        </main>
+        </div>
       </body>
     </html>
   );

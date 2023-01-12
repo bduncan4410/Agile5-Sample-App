@@ -1,7 +1,7 @@
 'use client'
 import { redirect } from 'next/navigation';
-import { createClient } from '../../db/base';
-import { removeTask } from '../../db/task';
+import { createClient } from '../../../db/base';
+import { removeTask } from '../../../db/task';
 import { useRouter } from 'next/navigation';
 
 export default function DeleteButton({deleteID} : any ){
